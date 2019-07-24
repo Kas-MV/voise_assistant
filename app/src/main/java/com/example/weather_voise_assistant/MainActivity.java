@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onClickSendButton(){
+        String text = questionField.getText().toString();
+        String answer = "Ок, понял";
+
+        chatWindow.append(">>" + text + "\n");
+        chatWindow.append("<<" + answer + "\n");
+
+        questionField.setText("");
 
     }
 

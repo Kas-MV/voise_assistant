@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onClickSendButton(){
         String text = questionField.getText().toString();
-        String answer = "Ок, понял";
+        String answer = AI.getAnswer(text);
 
         chatWindow.append(">>" + text + "\n");
         chatWindow.append("<<" + answer + "\n");

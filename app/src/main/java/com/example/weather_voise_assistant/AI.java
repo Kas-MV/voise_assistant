@@ -2,6 +2,7 @@ package com.example.weather_voise_assistant;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.util.Consumer;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AI {
-    public static String getAnswer (String user_question){
+    public static void getAnswer (String user_question, final Consumer<String> callback){
 
         Map<String, String> database = new HashMap(){{
             put("привет", "Здрасте");
@@ -23,7 +24,7 @@ public class AI {
         }};
         user_question = user_question.toLowerCase();
 
-        List<String> answers = new ArrayList<>();
+        final List<String> answers = new ArrayList<>();
 
         for (String database_questoin : database.keySet()){
             if (user_question.contains(database_questoin)){
@@ -35,13 +36,19 @@ public class AI {
         Matcher matcher = cityPattern.matcher(user_question);
         if (matcher.find()){
             String cityName = matcher.group(1);
-            answers.add("Не знаю я какая там погода у вас в городе " + cityName); //Заглушка
+            Weather.getWeather(cityName, new Consumer<String>() {
+                @Override
+                public void accept(String weather_forecast) {
+                    answers.add(weather_forecast);
+                }
+            });
+            //answers.add("Не знаю я какая там погода у вас в городе " + cityName); //Заглушка
         }
 
         if (answers.isEmpty()){
             answers.add("OK");
         }
-        return TextUtils.join(", " , answers);
+        callback.accept(TextUtils.join(", " , answers));
 
 
     }

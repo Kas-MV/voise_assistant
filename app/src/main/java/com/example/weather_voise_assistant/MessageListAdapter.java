@@ -20,6 +20,15 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         ((MessageViewHolder)viewHolder).bind(message);
     }
 
+    public int getItemViewType(int index){
+        Message message = messageList.get(index);
+        if (message.is_sent){
+            return USER_TYPE;
+        }else {
+            return ASSISTANT_TYPE;
+        }
+    }
+
     public RecyclerView.ViewHolder onCreateViewHolder (ViewGroup viewGroup, int view_type){
         View view;
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());

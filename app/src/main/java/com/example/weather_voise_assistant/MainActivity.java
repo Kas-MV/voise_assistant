@@ -1,5 +1,6 @@
 package com.example.weather_voise_assistant;
 
+import android.speech.tts.TextToSpeech;
 import android.support.v4.util.Consumer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     protected Button sendButton;
     protected EditText questionField;
     protected TextView chatWindow;
+
+    protected TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.onClickSendButton();
             }
         });
+
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR){
+                    tts.setLanguage(new Locale("ru"));
+                }
+            }
+        });
+
+
+
     }
 
     protected void onClickSendButton(){

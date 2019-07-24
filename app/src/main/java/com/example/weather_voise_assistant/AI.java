@@ -40,6 +40,8 @@ public class AI {
                 @Override
                 public void accept(String weather_forecast) {
                     answers.add(weather_forecast);
+                    callback.accept(TextUtils.join(", " , answers));
+
                 }
             });
             //answers.add("Не знаю я какая там погода у вас в городе " + cityName); //Заглушка

@@ -63,14 +63,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void accept(String answer) {
                // chatWindow.append("<<" + answer + "\n");
-                adapter.messageList.add(new Message(answer, ))
+                adapter.messageList.add(new Message(answer, false));
                 tts.speak(answer, TextToSpeech.QUEUE_FLUSH, null, null);
+                adapter.notifyDataSetChanged();
+                int lastMessageIndex = adapter.messageList.size() - 1;
+                chatMessageList.scrollToPosition(lastMessageIndex);
             }
         });
 
         //chatWindow.append(">>" + text + "\n");
-
-
+        adapter.messageList.add(new Message(text, true));
+        adapter.notifyDataSetChanged();
         questionField.setText("");
 
     }

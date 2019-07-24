@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AI {
     public static String getAnswer (String user_question){
@@ -27,6 +29,13 @@ public class AI {
             if (user_question.contains(database_questoin)){
                 answers.add(database.get(database_questoin));
             }
+        }
+
+        Pattern cityPattern = Pattern.compile("какая погода в городе (\\p{L}+)", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = cityPattern.matcher(user_question);
+        if (matcher.find()){
+            String cityName = matcher.group(1);
+            answers.add("Не знаю я какая там погода у вас в городе " + cityName); //Заглушка
         }
 
         if (answers.isEmpty()){

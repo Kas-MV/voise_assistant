@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR){
                     tts.setLanguage(new Locale("ru"));
+
                 }
             }
         });
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void accept(String answer) {
                 chatWindow.append("<<" + answer + "\n");
+                tts.speak(answer, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
 

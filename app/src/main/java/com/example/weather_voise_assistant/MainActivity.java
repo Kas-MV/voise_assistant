@@ -4,6 +4,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.util.Consumer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected Button sendButton;
     protected EditText questionField;
-    protected TextView chatWindow;
+    protected RecyclerView chatMessageList;
 
     protected TextToSpeech tts;
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         sendButton = findViewById(R.id.sendButton);
         questionField = findViewById(R.id.questionField);
-        chatWindow = findViewById(R.id.chatWindow);
+        chatMessageList = findViewById(R.id.chatWindow);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
